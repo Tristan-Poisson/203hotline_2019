@@ -50,10 +50,18 @@ def distribution(val):
     bi = [binomial(i, n, p) for i in range(51)]
     bi_over = sum(binomial(i, n, p) for i in range(26, 51)) * 100
     bi_time = (time() - bi_time) * 1000
-
+    po_time = time()
     po = [poisson(c, i) for i in range(51)]
-
-    print(bi, po, sep='\n')
+    po_over = sum(poisson(c, i) for i in range(26, 51)) * 100
+    po_time = (time() - po_time) * 1000
+    print("Binomial distribution:")
+    for i in range(51):
+        print("{}->{:.3f}".format(i, bi[i]), end='\t' if ((i + 1) % 5) and i != 50 else '\n')
+    print("overload: {:.1f}%\nComputation time: {:.2f}ms\n".format(bi_over, bi_time))
+    print("Poisson distribution:")
+    for i in range(51):
+        print("{}->{:.3f}".format(i, po[i]), end='\t' if ((i + 1) % 5) and i != 50 else '\n')
+    print("overload: {:.1f}%\nComputation time: {:.2f}ms".format(po_over, po_time))
     return 0
 
 def calc(val):
